@@ -32,7 +32,8 @@ const TimerCard = ({ timer }) => {
   return (
     <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
       <h3>{timer.label}</h3>
-      <p>Elapsed Time: {formatTime(displayTime)}</p>
+      <p title={`${displayTime}ms`}>Elapsed Time: {formatTime(displayTime)}</p>
+
       <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>
       {timer.isRunning ? (
         <button onClick={handlePause}>Pause</button>

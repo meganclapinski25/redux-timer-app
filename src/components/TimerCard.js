@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { formatTime } from "../utils/formatTime";
 import { pauseTimer, resumeTimer, resetTimer } from "../features/timers/TimerSlice";
 
 const TimerCard = ({ timer }) => {
   const dispatch = useDispatch();
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [displayTime, setDisplayTime] = useState(timer.elapsed);
 
-  // Update every second to show live elapsed time
   useEffect(() => {
+    let interval = null;
+
     if (timer.isRunning) {
-      // Reset currentTime when timer starts running
-      setCurrentTime(Date.now());
-      const interval = setInterval(() => {
-        setCurrentTime(Date.now());
+      interval = setInterval(() => {
+        const now = Date.now();
+        const newElapsed = now - timer.startTime + timer.elapsed;
+        setDisplayTime(newElapsed);
       }, 1000);
-      return () => clearInterval(interval);
+    } else {
+      setDisplayTime(timer.elapsed);
     }
-  }, [timer.isRunning, timer.startTime]);
+
+    return () => clearInterval(interval);
+  }, [timer.isRunning, timer.startTime, timer.elapsed]);
 
   const handlePause = () => dispatch(pauseTimer(timer.id));
   const handleResume = () => dispatch(resumeTimer(timer.id));
   const handleReset = () => dispatch(resetTimer(timer.id));
 
-  // Calculate current elapsed time including running time
-  const currentElapsed = timer.isRunning
-    ? timer.elapsed + (Date.now() - timer.startTime)
-    : timer.elapsed;
-  
-  const elapsedSeconds = Math.floor(currentElapsed / 1000);
+  const elapsedSeconds = Math.floor(displayTime / 1000);
 
   return (
-    <div style={styles.card}>
-      <h3 style={styles.cardTitle}>{timer.label}</h3>
-      <p style={styles.cardText}>Elapsed Time: {elapsedSeconds}s</p>
-      <p style={styles.cardText}>Status: {timer.isRunning ? "Running" : "Paused"}</p>
+    <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
+      <h3>{timer.label}</h3>
+      <p>Elapsed Time: {formatTime(displayTime)}</p>
+      <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>
       {timer.isRunning ? (
         <button onClick={handlePause}>Pause</button>
       ) : (
@@ -42,25 +42,6 @@ const TimerCard = ({ timer }) => {
       <button onClick={handleReset}>Reset</button>
     </div>
   );
-};
-
-const styles = {
-  card: {
-    backgroundColor: '#fff',
-    margin: 16,
-    padding: 16,
-    borderRadius: 10,
-    elevation: 3,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  cardText: {
-    fontSize: 14,
-    color: '#475569',
-  },
 };
 
 export default TimerCard;

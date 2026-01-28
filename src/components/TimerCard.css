@@ -1,5 +1,69 @@
-.card {
-  border: 1px solid #ccc;
-  padding: 10px;
+.timer-card {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.timer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.timer-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.timer-time {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 6px 0;
+  color: #0f172a;
+}
+
+.timer-status {
   margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.timer-status .running {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.timer-status .paused {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.timer-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.timer-actions button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #3b82f6;
+  color: white;
+}
+
+.timer-actions button:hover {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
 }

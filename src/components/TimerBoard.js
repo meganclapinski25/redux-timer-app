@@ -1,86 +1,83 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { addTimer } from "../features/timers/TimerSlice";
 import TimerCard from "./TimerCard";
 
-function TimerBoard() {
+export default function TimerBoard() {
   const timers = useSelector((state) => state.timers);
   const dispatch = useDispatch();
 
   const handleAddTimer = () => {
-    const label = prompt("Enter a timer label:") || "New Timer";
+    // React Native doesn't support prompt(). We'll just add a default label.
+    const label = "New Timer";
     dispatch(addTimer(label));
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h2 style={styles.headerTitle}>All Timers</h2>
-        <button style={styles.addButton} onClick={handleAddTimer}>
-          + Add Timer
-        </button>
-      </div>
-      <div style={styles.content}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>All Timers</Text>
+
+        <TouchableOpacity style={styles.addButton} onPress={handleAddTimer}>
+          <Text style={styles.addButtonText}>+ Add Timer</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.content}>
         {timers.length === 0 ? (
-          <div style={styles.emptyState}>
-            <p style={styles.emptyText}>No timers yet. Add one to get started!</p>
-          </div>
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyText}>
+              No timers yet. Add one to get started!
+            </Text>
+          </View>
         ) : (
-          timers.map((timer) => (
-            <TimerCard key={timer.id} timer={timer} />
-          ))
+          timers.map((timer) => <TimerCard key={timer.id} timer={timer} />)
         )}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f8fafc',
-    minHeight: '100vh',
+    backgroundColor: "#f8fafc",
   },
   header: {
-    padding: '24px 20px',
-    backgroundColor: '#0f172a',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    paddingVertical: 24,
+    paddingHorizontal: 20,
+    backgroundColor: "#0f172a",
+    // RN shadow (iOS) + elevation (Android)
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
   },
   headerTitle: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
-    margin: '0 0 16px 0',
+    fontWeight: "700",
+    color: "#fff",
+    marginBottom: 16,
   },
   addButton: {
-    display: 'block',
-    margin: '0 auto',
-    backgroundColor: '#3b82f6',
-    color: '#fff',
-    border: 'none',
-    padding: '12px 24px',
+    alignSelf: "center",
+    backgroundColor: "#3b82f6",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     borderRadius: 8,
+    // RN shadow
+    shadowColor: "#3b82f6",
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+  },
+  addButtonText: {
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
-    boxShadow: '0 2px 4px rgba(59, 130, 246, 0.3)',
+    fontWeight: "600",
   },
-  content: {
-    padding: '20px 0',
-    maxWidth: 800,
-    margin: '0 auto',
-  },
-  emptyState: {
-    textAlign: 'center',
-    padding: '60px 20px',
-  },
-  emptyText: {
-    fontSize: 16,
-    color: '#64748b',
-    margin: 0,
-  },
-};
-
-export default TimerBoard;
+ 
+});

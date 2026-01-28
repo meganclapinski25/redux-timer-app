@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatTime } from "../utils/formatTime";
-import { pauseTimer, resumeTimer, resetTimer } from "../features/timers/TimerSlice";
+import { pauseTimer, resumeTimer, resetTimer, deleteTimer } from "../features/timers/TimerSlice";
 
 const TimerCard = ({ timer }) => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const TimerCard = ({ timer }) => {
   const handlePause = () => dispatch(pauseTimer(timer.id));
   const handleResume = () => dispatch(resumeTimer(timer.id));
   const handleReset = () => dispatch(resetTimer(timer.id));
+  const handleDelete = () => dispatch(deleteTimer(timer.id));
 
   const elapsedSeconds = Math.floor(displayTime / 1000);
 
@@ -41,6 +42,12 @@ const TimerCard = ({ timer }) => {
         <button onClick={handleResume}>Resume</button>
       )}
       <button onClick={handleReset}>Reset</button>
+      <button
+        onClick={handleDelete}
+        style={{ marginLeft: 8, backgroundColor: "#ef4444", color: "white" }}
+      >
+        Delete
+      </button>
     </div>
   );
 };

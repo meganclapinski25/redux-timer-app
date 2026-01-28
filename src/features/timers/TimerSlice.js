@@ -30,6 +30,10 @@ const timersSlice = createSlice({
         timer.isRunning = false;
       }
     },
+    deleteTimer: (state, action) => {
+      const timerId = action.payload;
+      return state.filter(timer => timer.id !== timerId);
+    },
   },
 });
 

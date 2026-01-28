@@ -72,5 +72,26 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#475569',
   },
+  // timer-board (max-width: 600; margin: auto)
+  board: {
+    width: "100%",
+    maxWidth: 600,
+    alignSelf: "center",
+  },
+
+  // button
+  button: {
+    backgroundColor: "#3498db",
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+    margin: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "600",
+  },
 });
 

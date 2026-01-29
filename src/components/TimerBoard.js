@@ -25,15 +25,9 @@ export default function TimerBoard() {
       </View>
 
       <View style={styles.content}>
-        {timers.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyText}>
-              No timers yet. Add one to get started!
-            </Text>
-          </View>
-        ) : (
-          timers.map((timer) => <TimerCard key={timer.id} timer={timer} />)
-        )}
+        {timers.map((timer) => (
+          <TimerCard key={timer.id} timer={timer} />
+        ))}
       </View>
     </View>
   );

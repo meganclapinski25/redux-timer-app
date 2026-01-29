@@ -1,43 +1,56 @@
 .timer-card {
   background: white;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid #e2e8f0;
 }
 
 .timer-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .timer-title {
-  margin: 0 0 6px;
-  font-size: 18px;
-  color: #1f2937;
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.timer-title:hover {
+  color: #3b82f6;
+}
+
+.timer-hint {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0 0 12px;
 }
 
 .timer-time {
   font-size: 22px;
   font-weight: 600;
-  margin: 6px 0;
+  margin: 0 0 8px;
   color: #0f172a;
 }
 
 .timer-status {
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   font-size: 14px;
+  font-weight: 500;
 }
 
-.timer-status .running {
+.timer-status.running {
   color: #16a34a;
-  font-weight: 600;
 }
 
-.timer-status .paused {
-  color: #dc2626;
-  font-weight: 600;
+.timer-status.paused {
+  color: #64748b;
 }
 
 .timer-actions {
@@ -48,22 +61,24 @@
 
 .timer-actions button {
   border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 14px;
   background-color: #3b82f6;
   color: white;
+  transition: background-color 0.15s ease;
 }
 
 .timer-actions button:hover {
   background-color: #2563eb;
 }
 
-.delete-btn {
+.timer-actions .delete-btn {
   background-color: #ef4444;
 }
 
-.delete-btn:hover {
+.timer-actions .delete-btn:hover {
   background-color: #dc2626;
 }

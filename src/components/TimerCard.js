@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatTime } from "../utils/formatTime";
 import { pauseTimer, resumeTimer, resetTimer, deleteTimer, updateTimerLabel } from "../features/timers/TimerSlice";
+import "./TimerCard.css";
 
 const TimerCard = ({ timer }) => {
   const dispatch = useDispatch();
@@ -37,26 +38,28 @@ const TimerCard = ({ timer }) => {
   };
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
-      <h3 onClick={handleRename} style={{ cursor: "pointer", marginTop: 0 }} title="Click to rename">
+    <div className="timer-card">
+      <h3 className="timer-title" onClick={handleRename} title="Click to rename">
         {timer.label}
       </h3>
-      <p style={{ fontSize: 12, color: "#64748b", marginTop: -4, marginBottom: 8 }}>Click title to update Name</p>
-      <p title={`${displayTime}ms`}>Elapsed Time: {formatTime(displayTime)}</p>
-
-      <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>
-      {timer.isRunning ? (
-        <button onClick={handlePause}>Pause</button>
-      ) : (
-        <button onClick={handleResume}>Resume</button>
-      )}
-      <button onClick={handleReset}>Reset</button>
-      <button
-        onClick={handleDelete}
-        style={{ marginLeft: 8, backgroundColor: "#ef4444", color: "white" }}
-      >
-        Delete
-      </button>
+      <p className="timer-hint">Click title to update name</p>
+      <p className="timer-time" title={`${displayTime}ms`}>
+        Elapsed Time: {formatTime(displayTime)}
+      </p>
+      <p className={`timer-status ${timer.isRunning ? "running" : "paused"}`}>
+        Status: {timer.isRunning ? "Running" : "Paused"}
+      </p>
+      <div className="timer-actions">
+        {timer.isRunning ? (
+          <button type="button" onClick={handlePause}>Pause</button>
+        ) : (
+          <button type="button" onClick={handleResume}>Resume</button>
+        )}
+        <button type="button" onClick={handleReset}>Reset</button>
+        <button type="button" className="delete-btn" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

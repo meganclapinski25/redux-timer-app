@@ -38,5 +38,5 @@ const timersSlice = createSlice({
   },
 });
 
-export const { addTimer, pauseTimer, resumeTimer, resetTimer } = timersSlice.actions;
+export const { addTimer, pauseTimer, resumeTimer, resetTimer, deleteTimer } = timersSlice.actions;
 export default timersSlice.reducer;

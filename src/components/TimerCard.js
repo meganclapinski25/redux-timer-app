@@ -29,8 +29,6 @@ const TimerCard = ({ timer }) => {
   const handleReset = () => dispatch(resetTimer(timer.id));
   const handleDelete = () => dispatch(deleteTimer(timer.id));
 
-  const elapsedSeconds = Math.floor(displayTime / 1000);
-
   return (
     <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
       <h3>{timer.label}</h3>

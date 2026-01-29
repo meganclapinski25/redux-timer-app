@@ -10,8 +10,7 @@ export default function TimerBoard() {
   const dispatch = useDispatch();
 
   const handleAddTimer = () => {
-    // React Native doesn't support prompt(). We'll just add a default label.
-    const label = "New Timer";
+    const label = prompt("Enter a timer label:") || "New Timer";
     dispatch(addTimer(label));
   };
 
@@ -80,5 +79,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
- 
 });

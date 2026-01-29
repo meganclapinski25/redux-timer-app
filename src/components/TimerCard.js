@@ -41,7 +41,7 @@ const TimerCard = ({ timer }) => {
       <h3 onClick={handleRename} style={{ cursor: "pointer", marginTop: 0 }} title="Click to rename">
         {timer.label}
       </h3>
-      <p style={{ fontSize: 12, color: "#64748b", marginTop: -4, marginBottom: 8 }}>Click to update</p>
+      <p style={{ fontSize: 12, color: "#64748b", marginTop: -4, marginBottom: 8 }}>Click title to update Name</p>
       <p title={`${displayTime}ms`}>Elapsed Time: {formatTime(displayTime)}</p>
 
       <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>

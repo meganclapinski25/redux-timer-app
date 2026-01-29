@@ -35,13 +35,8 @@ const timersSlice = createSlice({
       const timerId = action.payload;
       return state.filter(timer => timer.id !== timerId);
     },
-    updateTimerLabel: (state, action) => {
-      const { id, label } = action.payload;
-      const timer = state.find(t => t.id === id);
-      if (timer) timer.label = label;
-    },
   },
 });
 
-export const { addTimer, pauseTimer, resumeTimer, resetTimer, deleteTimer, updateTimerLabel } = timersSlice.actions;
+export const { addTimer, pauseTimer, resumeTimer, resetTimer } = timersSlice.actions;
 export default timersSlice.reducer;

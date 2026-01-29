@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatTime } from "../utils/formatTime";
-import { pauseTimer, resumeTimer, resetTimer, deleteTimer } from "../features/timers/TimerSlice";
+import { pauseTimer, resumeTimer, resetTimer, deleteTimer, updateTimerLabel } from "../features/timers/TimerSlice";
 
 const TimerCard = ({ timer }) => {
   const dispatch = useDispatch();
@@ -29,9 +29,19 @@ const TimerCard = ({ timer }) => {
   const handleReset = () => dispatch(resetTimer(timer.id));
   const handleDelete = () => dispatch(deleteTimer(timer.id));
 
+  const handleRename = () => {
+    const label = prompt("Enter new name:", timer.label);
+    if (label != null) {
+      dispatch(updateTimerLabel({ id: timer.id, label: label.trim() || timer.label }));
+    }
+  };
+
   return (
     <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
-      <h3>{timer.label}</h3>
+      <h3 onClick={handleRename} style={{ cursor: "pointer", marginTop: 0 }} title="Click to rename">
+        {timer.label}
+      </h3>
+      <p style={{ fontSize: 12, color: "#64748b", marginTop: -4, marginBottom: 8 }}>Click to update</p>
       <p title={`${displayTime}ms`}>Elapsed Time: {formatTime(displayTime)}</p>
 
       <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>

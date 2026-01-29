@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatTime } from "../utils/formatTime";
@@ -31,36 +32,25 @@ const TimerCard = ({ timer }) => {
   const elapsedSeconds = Math.floor(displayTime / 1000);
 
   return (
-    <div className="timer-card">
-      <h3 className="timer-title">{timer.label}</h3>
-  
-      <p className="timer-time" title={`${displayTime}ms`}>
-        {formatTime(displayTime)}
-      </p>
-  
-      <p className="timer-status">
-        Status:{" "}
-        <span className={timer.isRunning ? "running" : "paused"}>
-          {timer.isRunning ? "Running" : "Paused"}
-        </span>
-      </p>
-  
-      <div className="timer-actions">
-        {timer.isRunning ? (
-          <button onClick={handlePause}>Pause</button>
-        ) : (
-          <button onClick={handleResume}>Resume</button>
-        )}
-  
-        <button onClick={handleReset}>Reset</button>
-  
-        <button className="delete-btn" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
+    <div style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
+      <h3>{timer.label}</h3>
+      <p title={`${displayTime}ms`}>Elapsed Time: {formatTime(displayTime)}</p>
+
+      <p>Status: {timer.isRunning ? "Running" : "Paused"}</p>
+      {timer.isRunning ? (
+        <button onClick={handlePause}>Pause</button>
+      ) : (
+        <button onClick={handleResume}>Resume</button>
+      )}
+      <button onClick={handleReset}>Reset</button>
+      <button
+        onClick={handleDelete}
+        style={{ marginLeft: 8, backgroundColor: "#ef4444", color: "white" }}
+      >
+        Delete
+      </button>
     </div>
   );
-  
 };
 
 export default TimerCard;
